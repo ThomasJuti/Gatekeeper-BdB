@@ -23,15 +23,46 @@ const Solicitudes = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Nueva solicitud:', formData);
-        //Solicitud al backend
-        setShowModal(false);
-        setFormData({
-            titulo: '',
-            descripcion: '',
-            solicitante: '',
-            responsable: '',
-            tipoSolicitud: 'despliegue'
-        });
+        // Enviar solicitud al backend
+        fetch('http://localhost:8081/api/solicitudes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                titulo: formData.titulo,
+                descripcion: formData.descripcion,
+                solicitante: formData.solicitante,
+                responsable: formData.responsable,
+                // convertimos a mayúsculas para coincidir con la DB (opcional)
+                tipoSolicitud: (formData.tipoSolicitud || 'otro').toUpperCase()
+            })
+        })
+            .then(async (res) => {
+                if (!res.ok) {
+                    const err = await res.json().catch(() => ({}));
+                    throw new Error(err.error || 'Error creando la solicitud');
+                }
+                return res.json();
+            })
+            .then((data) => {
+                console.log('Solicitud creada:', data);
+                // cerrar modal y resetear formulario
+                setShowModal(false);
+                setFormData({
+                    titulo: '',
+                    descripcion: '',
+                    solicitante: '',
+                    responsable: '',
+                    tipoSolicitud: 'despliegue'
+                });
+                // opcional: mostrar confirmación
+                alert('Solicitud creada correctamente (codigo: ' + (data.codigoSolicitud || data.codigo_solicitud || data.id) + ')');
+            })
+            .catch((err) => {
+                console.error('Error creating solicitud:', err);
+                alert('Error creando la solicitud: ' + err.message);
+            });
     };
 
     const handleChange = (e) => {
