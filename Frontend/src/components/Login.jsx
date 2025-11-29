@@ -20,7 +20,7 @@ const Login = ({ onLogin }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(''); 
+        setError('');
 
         if (!formData.username || !formData.password) {
             setError('Por favor, complete todos los campos');
@@ -42,7 +42,7 @@ const Login = ({ onLogin }) => {
                 throw new Error(data.error || 'Error al iniciar sesión');
             }
 
-            console.log('Login successful:', data);
+            console.log('Login successful:');
 
             if (onLogin) {
                 onLogin(data);

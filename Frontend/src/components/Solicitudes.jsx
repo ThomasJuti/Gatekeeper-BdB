@@ -11,6 +11,15 @@ const Solicitudes = () => {
         tipoSolicitud: 'despliegue'
     });
 
+    const [users, setUsers] = useState([]);
+    //Solicitud de total usuarios
+    React.useEffect(() => {
+        fetch('http://localhost:8081/api/usuarios')
+            .then(response => response.json())
+            .then(data => setUsers(data))
+            .catch(error => console.error('Error fetching users:', error));
+    }, []);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Nueva solicitud:', formData);
@@ -105,29 +114,39 @@ const Solicitudes = () => {
 
                             <div className="form-row">
                                 <div className="form-group">
-                                    <label htmlFor="solicitante">Solicitante (Usuario de Red) *</label>
-                                    <input
-                                        type="text"
+                                    <label htmlFor="solicitante">Solicitante *</label>
+                                    <select
                                         id="solicitante"
                                         name="solicitante"
                                         value={formData.solicitante}
                                         onChange={handleChange}
                                         required
-                                        placeholder="usuario@dominio"
-                                    />
+                                    >
+                                        <option value="">Seleccione un usuario</option>
+                                        {users.map(user => (
+                                            <option key={user.id} value={user.username}>
+                                                {user.nombreCompleto} ({user.username})
+                                            </option>
+                                        ))}
+                                    </select>
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="responsable">Responsable (Usuario de Red) *</label>
-                                    <input
-                                        type="text"
+                                    <label htmlFor="responsable">Responsable *</label>
+                                    <select
                                         id="responsable"
                                         name="responsable"
                                         value={formData.responsable}
                                         onChange={handleChange}
                                         required
-                                        placeholder="responsable@dominio"
-                                    />
+                                    >
+                                        <option value="">Seleccione un usuario</option>
+                                        {users.map(user => (
+                                            <option key={user.id} value={user.username}>
+                                                {user.nombreCompleto} ({user.username})
+                                            </option>
+                                        ))}
+                                    </select>
                                 </div>
                             </div>
 

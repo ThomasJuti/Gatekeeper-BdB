@@ -8,13 +8,13 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleLogin = (credentials) => {
-    console.log('Login successful:', credentials);
+    console.log('Login successful:');
     setIsAuthenticated(true);
   };
 
   const handleRegister = (userData) => {
 
-    console.log('Register successful:', userData);
+    console.log('Register successful:');
     setIsAuthenticated(true);
   };
 
