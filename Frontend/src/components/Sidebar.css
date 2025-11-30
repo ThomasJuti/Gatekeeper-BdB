@@ -89,6 +89,19 @@
     border-top: var(--glass-border);
 }
 
+.user-profile-simple {
+    margin-bottom: 1rem;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.user-name-simple {
+    font-weight: 600;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    display: block;
+}
+
 .logout-btn {
     width: 100%;
     display: flex;

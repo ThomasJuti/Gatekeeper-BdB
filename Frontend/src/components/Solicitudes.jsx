@@ -39,7 +39,7 @@ const Solicitudes = () => {
 
   const fetchSolicitudes = () => {
     if (currentUser && currentUser.id) {
-      fetch(`http://localhost:8081/api/solicitudes/usuario/${currentUser.id}`)
+      fetch(`http://localhost:8081/api/solicitudes/usuario/${currentUser.id}/pendientes`)
         .then((response) => response.json())
         .then((data) => setSolicitudes(data))
         .catch((error) => console.error("Error fetching solicitudes:", error));
@@ -142,8 +142,8 @@ const Solicitudes = () => {
         });
         alert(
           "Solicitud creada correctamente (codigo: " +
-            (data.codigoSolicitud || data.codigo_solicitud || data.id) +
-            ")",
+          (data.codigoSolicitud || data.codigo_solicitud || data.id) +
+          ")",
         );
       })
       .catch((err) => {
@@ -181,13 +181,7 @@ const Solicitudes = () => {
   return (
     <div className="content-wrapper">
       <div className="page-header">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
+        <div className="header-content">
           <div>
             <h1 className="page-title">Mis Solicitudes</h1>
             {currentUser && (
@@ -207,7 +201,7 @@ const Solicitudes = () => {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              style={{ marginRight: "8px" }}
+              className="btn-icon"
             >
               <line x1="12" y1="5" x2="12" y2="19"></line>
               <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -219,14 +213,14 @@ const Solicitudes = () => {
 
       <div className="card">
         <h3>Solicitudes Asignadas</h3>
-        <p style={{ marginBottom: "20px" }}>
+        <p className="card-description">
           Solicitudes donde eres solicitante o responsable
         </p>
 
         {solicitudes.length === 0 ? (
           <div className="empty-state">No tienes solicitudes asignadas</div>
         ) : (
-          <div style={{ overflowX: "auto" }}>
+          <div className="table-container">
             <table className="solicitudes-table">
               <thead>
                 <tr>

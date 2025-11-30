@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 
 const Sidebar = ({ onLogout }) => {
     const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const userStr = localStorage.getItem('user');
+        if (userStr) {
+            setUser(JSON.parse(userStr));
+        }
+    }, []);
 
     const handleLogout = () => {
         if (onLogout) {
@@ -46,6 +54,13 @@ const Sidebar = ({ onLogout }) => {
                     Historial
                 </NavLink>
             </nav>
+            <div>
+                {user && (
+                    <div className="user-profile-simple">
+                        <span className="user-name-simple">{user.nombreCompleto}</span>
+                    </div>
+                )}
+            </div>
 
             <div className="sidebar-footer">
                 <button className="logout-btn" onClick={handleLogout}>

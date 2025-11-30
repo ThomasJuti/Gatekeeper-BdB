@@ -32,3 +32,69 @@
     color: var(--text-muted);
     line-height: 1.6;
 }
+
+.history-list {
+    margin-top: 1.5rem;
+}
+
+.history-empty {
+    color: #94a3b8;
+    text-align: center;
+    padding: 2rem;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+}
+
+.history-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(99, 102, 241, 0.2);
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #818cf8;
+    font-weight: bold;
+}
+
+.history-content {
+    flex: 1;
+}
+
+.history-title {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+    color: var(--text-muted);
+}
+
+.history-code {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-left: 0.5rem;
+}
+
+.history-meta {
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+.history-role {
+    margin-left: 0.5rem;
+}
+
+.history-status {
+    margin-left: 1rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+}

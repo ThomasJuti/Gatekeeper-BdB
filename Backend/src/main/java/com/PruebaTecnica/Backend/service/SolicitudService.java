@@ -23,6 +23,11 @@ public interface SolicitudService {
     // Rechazar solicitud
     Solicitud rechazarSolicitud(Long solicitudId, String comentario);
     
-    // Obtener solicitud por ID
+    // Obtener solicitudes pendientes
+    List<Solicitud> getSolicitudesPendientesByUsuario(Long usuarioId);
+
+    // Obtener historial de solicitudes (Aprobadas/Rechazadas)
+    List<Solicitud> getHistorialSolicitudesByUsuario(Long usuarioId);
+
     Solicitud getSolicitudById(Long solicitudId);
 }

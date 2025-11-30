@@ -71,6 +71,20 @@ public class SolicitudController {
         return ResponseEntity.ok(solicitudes);
     }
 
+    // Obtener solicitudes pendientes
+    @GetMapping("/usuario/{usuarioId}/pendientes")
+    public ResponseEntity<List<Solicitud>> getSolicitudesPendientesByUsuario(@PathVariable Long usuarioId) {
+        List<Solicitud> solicitudes = solicitudService.getSolicitudesPendientesByUsuario(usuarioId);
+        return ResponseEntity.ok(solicitudes);
+    }
+
+    // Obtener historial de solicitudes
+    @GetMapping("/usuario/{usuarioId}/historial")
+    public ResponseEntity<List<Solicitud>> getHistorialSolicitudesByUsuario(@PathVariable Long usuarioId) {
+        List<Solicitud> solicitudes = solicitudService.getHistorialSolicitudesByUsuario(usuarioId);
+        return ResponseEntity.ok(solicitudes);
+    }
+
     // Aprobar solicitud
     @PutMapping("/{id}/aprobar")
     public ResponseEntity<?> aprobarSolicitud(

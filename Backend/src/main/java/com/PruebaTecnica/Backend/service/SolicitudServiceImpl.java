@@ -88,7 +88,7 @@ public class SolicitudServiceImpl implements SolicitudService {
     public List<Solicitud> getSolicitudesByUsuario(Long usuarioId) {
         Usuario usuario = usuarioRepository.findById(usuarioId)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        return solicitudRepository.findBySolicitanteOrResponsable(usuario, usuario);
+        return solicitudRepository.findBySolicitanteOrResponsableOrderByFechaCreacionDesc(usuario, usuario);
     }
 
     @Override
@@ -115,6 +115,20 @@ public class SolicitudServiceImpl implements SolicitudService {
         solicitud.setFechaRespuesta(LocalDateTime.now());
         
         return solicitudRepository.save(solicitud);
+    }
+
+    @Override
+    public List<Solicitud> getSolicitudesPendientesByUsuario(Long usuarioId) {
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        return solicitudRepository.findPendingRequests(usuario, Solicitud.Estado.PENDIENTE);
+    }
+
+    @Override
+    public List<Solicitud> getHistorialSolicitudesByUsuario(Long usuarioId) {
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        return solicitudRepository.findHistoryRequests(usuario, List.of(Solicitud.Estado.APROBADA, Solicitud.Estado.RECHAZADA));
     }
 
     @Override
