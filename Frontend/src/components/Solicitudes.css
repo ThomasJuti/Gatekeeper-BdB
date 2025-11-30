@@ -12,6 +12,11 @@
     -webkit-text-fill-color: transparent;
 }
 
+.user-welcome {
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 8px;
+}
+
 .card {
     background: var(--bg-card);
     border: var(--glass-border);
@@ -33,6 +38,81 @@
     line-height: 1.6;
 }
 
+/* Tabla de solicitudes */
+.solicitudes-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.solicitudes-table thead tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.solicitudes-table th {
+    padding: 12px;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+}
+
+.solicitudes-table tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background-color 0.2s;
+}
+
+.solicitudes-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.solicitudes-table td {
+    padding: 12px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Badges de estado */
+.estado-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.estado-pendiente {
+    background-color: rgba(255, 165, 0, 0.2);
+    color: #FFA500;
+}
+
+.estado-aprobada {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: #4CAF50;
+}
+
+.estado-rechazada {
+    background-color: rgba(244, 67, 54, 0.2);
+    color: #F44336;
+}
+
+.estado-cancelada {
+    background-color: rgba(158, 158, 158, 0.2);
+    color: #9E9E9E;
+}
+
+/* Indicadores de rol */
+.rol-solicitante {
+    color: #2196F3;
+}
+
+.rol-responsable {
+    color: #FF9800;
+}
+
+/* Botones */
 .btn-primary {
     display: inline-flex;
     align-items: center;
@@ -72,6 +152,54 @@
     border-color: rgba(0, 51, 102, 0.25);
 }
 
+.btn-details {
+    padding: 6px 12px;
+    background: #003366;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.btn-details:hover {
+    background: #004488;
+}
+
+.btn-aprobar {
+    flex: 1;
+    padding: 10px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-aprobar:hover {
+    background: #45a049;
+}
+
+.btn-rechazar {
+    flex: 1;
+    padding: 10px;
+    background: #F44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-rechazar:hover {
+    background: #da190b;
+}
+
+/* Modal */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -98,6 +226,10 @@
     overflow-y: auto;
     box-shadow: 0 20px 60px rgba(0, 51, 102, 0.2);
     animation: slideUp 0.3s ease-out;
+}
+
+.modal-content-wide {
+    max-width: 600px;
 }
 
 @keyframes slideUp {
@@ -142,6 +274,80 @@
     color: var(--text-main);
 }
 
+/* Detalles de solicitud */
+.detail-section {
+    padding: 20px;
+}
+
+.detail-item {
+    margin-bottom: 16px;
+}
+
+.detail-label {
+    color: rgba(24, 109, 255, 0.7);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.detail-value {
+    margin-top: 4px;
+    color: var(--text-main);
+}
+
+.comment-box {
+    margin-bottom: 16px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.actions-section {
+    margin-top: 24px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.actions-title {
+    color: rgba(255, 255, 255, 0.7);
+    display: block;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.comment-textarea {
+    width: 100%;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: white;
+    font-size: 14px;
+    margin-bottom: 12px;
+    font-family: inherit;
+    resize: vertical;
+}
+
+.comment-textarea:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.status-message {
+    margin-top: 16px;
+    padding: 12px;
+    background: rgba(255, 165, 0, 0.1);
+    border-radius: 8px;
+    color: #FFA500;
+}
+
+/* Formulario */
 .modal-form {
     display: flex;
     flex-direction: column;

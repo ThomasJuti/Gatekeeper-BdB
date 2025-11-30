@@ -42,7 +42,10 @@ const Login = ({ onLogin }) => {
                 throw new Error(data.error || 'Error al iniciar sesión');
             }
 
-            console.log('Login successful:');
+            console.log('Login successful:', data);
+
+            // Guardar datos del usuario en localStorage
+            localStorage.setItem('user', JSON.stringify(data));
 
             if (onLogin) {
                 onLogin(data);

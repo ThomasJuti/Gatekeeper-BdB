@@ -1,6 +1,8 @@
 package com.PruebaTecnica.Backend.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Locale;
 
 import org.springframework.stereotype.Service;
@@ -66,5 +68,58 @@ public class SolicitudServiceImpl implements SolicitudService {
         Solicitud saved = solicitudRepository.save(s);
 
         return saved;
+    }
+
+    @Override
+    public List<Solicitud> getSolicitudesBySolicitante(Long usuarioId) {
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        return solicitudRepository.findBySolicitante(usuario);
+    }
+
+    @Override
+    public List<Solicitud> getSolicitudesByResponsable(Long usuarioId) {
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        return solicitudRepository.findByResponsable(usuario);
+    }
+
+    @Override
+    public List<Solicitud> getSolicitudesByUsuario(Long usuarioId) {
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        return solicitudRepository.findBySolicitanteOrResponsable(usuario, usuario);
+    }
+
+    @Override
+    @Transactional
+    public Solicitud aprobarSolicitud(Long solicitudId, String comentario) {
+        Solicitud solicitud = solicitudRepository.findById(solicitudId)
+                .orElseThrow(() -> new RuntimeException("Solicitud no encontrada"));
+        
+        solicitud.setEstado(Solicitud.Estado.APROBADA);
+        solicitud.setComentarioAprobador(comentario);
+        solicitud.setFechaRespuesta(LocalDateTime.now());
+        
+        return solicitudRepository.save(solicitud);
+    }
+
+    @Override
+    @Transactional
+    public Solicitud rechazarSolicitud(Long solicitudId, String comentario) {
+        Solicitud solicitud = solicitudRepository.findById(solicitudId)
+                .orElseThrow(() -> new RuntimeException("Solicitud no encontrada"));
+        
+        solicitud.setEstado(Solicitud.Estado.RECHAZADA);
+        solicitud.setComentarioAprobador(comentario);
+        solicitud.setFechaRespuesta(LocalDateTime.now());
+        
+        return solicitudRepository.save(solicitud);
+    }
+
+    @Override
+    public Solicitud getSolicitudById(Long solicitudId) {
+        return solicitudRepository.findById(solicitudId)
+                .orElseThrow(() -> new RuntimeException("Solicitud no encontrada"));
     }
 }

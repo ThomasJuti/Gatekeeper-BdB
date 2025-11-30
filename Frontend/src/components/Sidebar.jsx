@@ -16,7 +16,7 @@ const Sidebar = ({ onLogout }) => {
         <aside className="sidebar">
             <div className="sidebar-header">
                 <div className="logo-icon">W</div>
-                <span className="app-title">WebPortal</span>
+                <span className="app-title">Gatekeeper</span>
             </div>
 
             <nav className="nav-menu">
