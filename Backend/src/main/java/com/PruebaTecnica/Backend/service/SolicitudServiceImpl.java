@@ -25,6 +25,7 @@ public class SolicitudServiceImpl implements SolicitudService {
     private final SolicitudRepository solicitudRepository;
     private final UsuarioRepository usuarioRepository;
     private final TipoSolicitudRepository tipoSolicitudRepository;
+    private final EmailService emailService;
 
     @Override
     @Transactional
@@ -66,6 +67,16 @@ public class SolicitudServiceImpl implements SolicitudService {
         // prioridades y estado por defecto ya vienen en la entidad
 
         Solicitud saved = solicitudRepository.save(s);
+
+        // Enviar notificación por correo al responsable
+        if (responsable.getEmail() != null && !responsable.getEmail().isEmpty()) {
+            emailService.sendNewRequestNotification(
+                responsable.getEmail(), 
+                saved.getTitulo(), 
+                saved.getCodigoSolicitud(), 
+                solicitante.getNombreCompleto()
+            );
+        }
 
         return saved;
     }

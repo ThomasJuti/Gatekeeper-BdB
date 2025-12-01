@@ -5,7 +5,7 @@ import './Sidebar.css';
 const Sidebar = ({ onLogout }) => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
-
+    //Obtener nombre del usuario logueado
     useEffect(() => {
         const userStr = localStorage.getItem('user');
         if (userStr) {
