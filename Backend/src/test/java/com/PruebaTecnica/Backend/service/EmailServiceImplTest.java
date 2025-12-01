@@ -2,14 +2,16 @@ package com.PruebaTecnica.Backend.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.ArgumentMatchers.any;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 //Pruebas unitarias para EmailServiceImpl
 //Estas pruebas validan el comportamiento del servicio de envio de emails
@@ -60,7 +62,7 @@ class EmailServiceImplTest {
         emailService.sendNewRequestNotification(to, requestTitle, requestCode, applicantName);
 
         // Verificar que se intento enviar el email
-        // Aunque fallo, el metodo debe completarse sin lanzar excepcion
+        // Aunque falle, el metodo debe completarse sin lanzar excepcion
         verify(emailSender, times(1)).send(any(SimpleMailMessage.class));
     }
 }

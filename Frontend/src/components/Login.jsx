@@ -28,7 +28,7 @@ const Login = ({ onLogin }) => {
         }
         //try login backend
         try {
-            const response = await fetch('http://localhost:8081/api/auth/login', {
+            const response = await fetch(import.meta.env.VITE_API_URL + '/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

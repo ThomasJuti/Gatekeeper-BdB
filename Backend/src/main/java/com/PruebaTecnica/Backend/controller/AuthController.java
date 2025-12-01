@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173","http://prueba-tecnica-frontend-thomas.s3-website.us-east-2.amazonaws.com"})
 public class AuthController {
 
     private final AuthService authService;

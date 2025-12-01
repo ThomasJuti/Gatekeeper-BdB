@@ -23,7 +23,7 @@ const Register = ({ onRegister }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(''); 
+        setError('');
 
         // Validación básica
         if (!formData.fullName || !formData.email || !formData.username || !formData.password || !formData.confirmPassword) {
@@ -42,7 +42,7 @@ const Register = ({ onRegister }) => {
         }
 
         try {
-            const response = await fetch('http://localhost:8081/api/auth/register', {
+            const response = await fetch(import.meta.env.VITE_API_URL + '/auth/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

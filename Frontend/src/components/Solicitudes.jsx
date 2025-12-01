@@ -31,7 +31,7 @@ const Solicitudes = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:8081/api/usuarios")
+    fetch(import.meta.env.VITE_API_URL + "/usuarios")
       .then((response) => response.json())
       .then((data) => setUsers(data))
       .catch((error) => console.error("Error fetching users:", error));
@@ -39,7 +39,7 @@ const Solicitudes = () => {
 
   const fetchSolicitudes = () => {
     if (currentUser && currentUser.id) {
-      fetch(`http://localhost:8081/api/solicitudes/usuario/${currentUser.id}/pendientes`)
+      fetch(`${import.meta.env.VITE_API_URL}/solicitudes/usuario/${currentUser.id}/pendientes`)
         .then((response) => response.json())
         .then((data) => setSolicitudes(data))
         .catch((error) => console.error("Error fetching solicitudes:", error));
@@ -64,7 +64,7 @@ const Solicitudes = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8081/api/solicitudes/${selectedSolicitud.id}/aprobar`,
+        `${import.meta.env.VITE_API_URL}/solicitudes/${selectedSolicitud.id}/aprobar`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -91,7 +91,7 @@ const Solicitudes = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8081/api/solicitudes/${selectedSolicitud.id}/rechazar`,
+        `${import.meta.env.VITE_API_URL}/solicitudes/${selectedSolicitud.id}/rechazar`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -112,7 +112,7 @@ const Solicitudes = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:8081/api/solicitudes", {
+    fetch(import.meta.env.VITE_API_URL + "/solicitudes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -214,7 +214,7 @@ const Solicitudes = () => {
       <div className="card">
         <h3>Solicitudes Asignadas</h3>
         <p className="card-description">
-          Solicitudes donde eres solicitante o responsable
+          Solicitudes pendientes
         </p>
 
         {solicitudes.length === 0 ? (

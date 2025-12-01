@@ -21,7 +21,7 @@ const Historial = () => {
 
     const fetchHistorial = async (userId) => {
         try {
-            const response = await fetch(`http://localhost:8081/api/solicitudes/usuario/${userId}/historial`);
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/solicitudes/usuario/${userId}/historial`);
             if (!response.ok) {
                 throw new Error('Error al obtener el historial');
             }

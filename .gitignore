@@ -10,6 +10,15 @@ Frontend/node_modules/
 Frontend/dist/
 Frontend/.env
 Frontend/.env.local
+Frontend/.env.production
+
+# Deployment - Archivos sensibles
+deployment/.env
+deployment/*.pem
+*.pem
+
+# Production configs con credenciales
+Backend/src/main/resources/application-prod.properties
 
 # IDE
 .idea/
@@ -19,3 +28,4 @@ Frontend/.env.local
 # OS
 .DS_Store
 Thumbs.db
+application-prod-fixed.properties
